@@ -1,0 +1,53 @@
+#job-offers .col {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+}
+
+.job-offer-title {
+    overflow: hidden;
+}
+
+.job-offer-title div {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: azure;
+}
+
+.job-offer-title .job-offer-year {
+    font-size: .850rem;
+}
+
+.slide-up>div,
+.slide-down>div {
+    transform: translateY(100%);
+    transition: .4s ease-in-out;
+}
+
+.slide-up>div {
+    transform: translateY(0);
+}
+
+.page-item:not(.active) .page-link {
+    color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity));
+}
+
+.page-item:not(.active) .page-link:hover {
+    background-color: #edf4fc;
+}
+
+.page-item.page-first a, .page-item.page-last a {
+    letter-spacing: -0.732rem;
+}
+
+#job-offer-details > .job-offer-title, #job-offer-details > .job-offer-cast {
+    letter-spacing: .175rem;
+}
+
+#job-offer-info > .job-offer-label > div:nth-child(1) {
+    flex: 0 0 125px;
+}
+
+#job-offer-info > .job-offer-label > div:nth-child(2) {
+    flex: 0 0 375px;
+}

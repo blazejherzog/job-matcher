@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <ul th:fragment="pagination(url)" th:if="${page.visible}" class="pagination pagination-sm justify-content-end">
+        <li th:if="${page.firstVisible}" th:classappend="${!page.hasFirst} ? 'disabled'" class="page-item page-first">
+            <a th:href="${page.hasFirst} ? @{{url}{id}(url=${url},id=${page.first})} : '#'" class="page-link px-3">❮❮</a>
+        </li>
+        <li th:classappend="${!page.hasPrevious} ? 'disabled'" class="page-item">
+            <a th:href="${page.hasPrevious} ? @{{url}{id}(url=${url},id=${page.previous})} : '#'" class="page-link">❮</a>
+        </li>
+        <li th:each="pageNumber : ${page.pageNumbers}" th:object="${pageNumber}" th:classappend="*{isActive} ? 'active'" class="page-item">
+            <a class="page-link" th:href="@{{url}{id}(url=${url},id=*{value})}" href="#" th:text="*{value}">#</a>
+        </li>
+        <li th:classappend="${!page.hasNext} ? 'disabled'" class="page-item">
+            <a th:href="${page.hasNext} ? @{{url}{id}(url=${url},id=${page.next})} : '#'" class="page-link">❯</a>
+        </li>
+        <li th:if="${page.lastVisible}" th:classappend="${!page.hasLast} ? 'disabled'" class="page-item page-first">
+            <a th:href="${page.hasLast} ? @{{url}{id}(url=${url},id=${page.last})} : '#'" class="page-link px-3">❯❯</a>
+        </li>
+    </ul>
+</body>
+</html>

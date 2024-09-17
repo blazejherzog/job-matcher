@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pl" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Panel Pracodawcy</title>
+    <link rel="icon" th:href="@{/img/svg/favicon.svg}" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<header class="sticky-top">
+    <nav class="navbar navbar-expand-lg bg-body shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <h1 class="h2 mb-0">
+                    <i class="bi bi-disc-fill text-danger align-text-bottom"></i>
+                    <span>JobMatcher</span>
+                </h1>
+            </a>
+
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu"
+                    aria-controls="menu" aria-expanded="false" aria-label="Menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="menu" class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item ps-2">
+                        <a th:if="${menu.isActive('panel')}"
+                           th:classappend="${menu.isActive('panel') ? 'active' : ''}"
+                           th:href="@{/}"
+                           class="nav-link fw-medium border border-info rounded"
+                           role="button"
+                           aria-expanded="false">
+                            <i class="bi bi-file-arrow-up" style="font-size: 1.2rem;"></i>
+                            <span style="vertical-align: text-bottom;">Panel Kandydata</span>
+                        </a>
+                        <a th:unless="${menu.isActive('panel')}"
+                           th:classappend="${menu.isActive('panel') ? 'active' : ''}"
+                           th:href="@{/admin}"
+                           class="nav-link fw-medium border border-info rounded"
+                           role="button"
+                           aria-expanded="false">
+                            <i class="bi bi-file-arrow-up" style="font-size: 1.2rem;"></i>
+                            <span style="vertical-align: text-bottom;">Panel Pracodawcy</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link fw-medium px-lg-3 dropdown-toggle" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-fill h2" style="vertical-align: sub;"></i>
+                            <span th:text="${#authentication.principal.firstName} + ' ' + ${#authentication.principal.lastName}"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li style="border-top: 1px solid #8080803d; margin-top: 2px;">
+                                <a th:href="@{/admin/logout}" class="dropdown-item" data-bs-toggle="modal"
+                                   data-bs-target="#modal-logout-admin">Wyloguj się</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div id="job-offer-details" class="container">
+
+    </div>
+</main>
+
+<footer class="mt-auto">
+    <div class="container">
+        <div class="d-flex flex-column flex-sm-row justify-content-center">
+            <div class="mb-2 mb-sm-0 text-center">
+                <p class="mb-0">&copy; 2024 JobMatcher</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="modal" id="modal-logout-admin" tabindex="-1" aria-labelledby="label-modal-logout" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content mb-5">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="label-modal-logout-admin">Wyloguj się</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Czy na pewno chcesz się wylogować?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+                <form th:action="@{/admin/logout}" method="post">
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Wyloguj</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
+<script src="./js/jobmatcher.js"></script>
+</body>
+
+
+</html>

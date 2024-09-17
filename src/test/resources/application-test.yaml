@@ -1,0 +1,8 @@
+spring:
+  h2:
+    console:
+      enabled: false
+
+jobmatcher:
+  job-offers:
+    page-size: 2

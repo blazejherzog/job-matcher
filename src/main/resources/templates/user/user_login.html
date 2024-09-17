@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pl" layout:decorate="~{layout.html}" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Kandydat - logowanie</title>
+</head>
+<body>
+    <div class="container" layout:fragment="content">
+        <h1 class="h3 my-4 text-lg-center text-uppercase" style="letter-spacing: .375rem;">Logowanie</h1>
+
+        <div th:if="${param.error}" class="row justify-content-center">
+            <div class="col-12 col-lg-11 col-xl-9 col-xxl-8">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <div>Nieprawidłowa nazwa użytkownika lub hasło.</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-4">
+                <form id="form-login-user" th:action="@{/user/login}" method="post" novalidate>
+                    <div class="row">
+                        <div class="col-md mb-3">
+                            <div class="form-floating">
+                                <input type="text" name="username" id="username" class="form-control"
+                                       placeholder="Nazwa użytkownika" required autocomplete="off">
+                                <label for="username" class="form-label text-body-tertiary">Nazwa użytkownika</label>
+                                <div class="invalid-feedback">
+                                    Proszę wprowadzić nazwę użytkownika
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md mb-3">
+                            <div class="form-floating">
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Hasło" required>
+                                <label for="password" class="form-label text-body-tertiary">Hasło</label>
+                                <div class="invalid-feedback">
+                                    Proszę wprowadzić hasło
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <button type="submit" class="btn btn-primary">Zaloguj</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

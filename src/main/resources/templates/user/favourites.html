@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pl" layout:decorate="~{layout.html}" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Obserwowane</title>
+</head>
+<body>
+    <div id="job-offers" class="container" layout:fragment="content">
+        <h1 class="h3 my-4 text-lg-center text-uppercase" style="letter-spacing: .375rem;">Obserwowane</h1>
+
+        <h1 th:if="${page.elements.empty}" class="display-1 text-lg-center fw-bold text-black-50 mt-5" style="opacity: 0.3">
+            Pusto <i class="bi bi-emoji-frown"></i>
+        </h1>
+
+        <ul th:replace="~{_fragments::pagination(url='/user/favourites/')}"></ul>
+
+        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mb-3">
+            <a th:each="jobOffer : ${page.elements}" th:object="${jobOffer}" th:href="@{/jobs/offers/{slug}(slug=*{slug})}" class="p-0 text-decoration-none">
+                <div class="col p-0 d-flex flex-column offer-logo"
+                     th:style="|background-image: url('@{/images/{id}/{filename}(id=*{poster.id},filename=*{poster.filename})}')|">
+                    <div class="job-offer-title mt-auto slide-down">
+                        <div class="p-2 d-flex flex-column">
+                            <span th:text="*{title}" class="fs-5 lh-sm fw-semibold"></span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <ul th:replace="~{_fragments::pagination(url='/user/favourites/')}"></ul>
+    </div>
+</body>
+</html>

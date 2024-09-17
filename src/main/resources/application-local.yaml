@@ -1,0 +1,22 @@
+jobmatcher:
+  images:
+    basePath: /Users/blazejherzog/data/logos
+  test-data:
+    enabled: true
+    users:
+      - username: blazejh
+        password: pass
+        firstName: Blazej
+        lastName: Herzog
+        authorities: [ROLE_ADMIN]
+      - username: customer
+        password: pass
+        firstName: Blazej
+        lastName: Herzog
+        authorities: [ROLE_USER]
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG

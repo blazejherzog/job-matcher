@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:jobmatcher
+    username: test
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+
+jobmatcher:
+  test-data:
+    enabled: false
+  images:
+    basePath: <TODO>
+  job-offers:
+    page-size: 48

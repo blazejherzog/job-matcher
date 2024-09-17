@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2024-02-22-add-job-offers-table:sequence" author="bherzog">
+        <createSequence sequenceName="JOB_OFFERS_ID_SEQ" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="2024-02-22-add-job-offers-table:table" author="bherzog">
+        <createTable tableName="JOB_OFFERS">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(254)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="CLOB">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="IMAGE_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="job_offers_image_fk" references="IMAGES(ID)"/>
+            </column>
+
+            <column name="JOB_BRANCH_ID" type="bigint">
+                <constraints nullable="false" foreignKeyName="job_offer_job_branch_fk" references="JOB_BRANCHES(id)"/>
+            </column>
+
+
+            <column name="ADD_DATE" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2024-03-25-add-job-locations-table:join-table" author="bherzog">
+        <createTable tableName="JOB_OFFERS_JOB_LOCATIONS">
+            <column name="JOB_OFFER_ID" type="bigint">
+                <constraints foreignKeyName="job_offers_job_locations_job_offers_fk" references="JOB_OFFERS(ID)" nullable="false"/>
+            </column>
+            <column name="JOB_LOCATION_ID" type="bigint">
+                <constraints foreignKeyName="job_offers_job_locations_job_locations_fk" references="JOB_LOCATIONS(ID)" nullable="false"/>
+            </column>
+            <column name="add_date" type="TIMESTAMP" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2024-03-25-add-job-locations-table:join-table-pk" author="bherzog">
+        <addPrimaryKey tableName="job_offers_job_locations" columnNames="job_offer_id, job_location_id"/>
+    </changeSet>
+
+</databaseChangeLog>
